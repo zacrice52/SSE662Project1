@@ -5,8 +5,7 @@ namespace SSE662Project1.Objects
 {
     public class Record
     {
-        public List<Expense> Expenses;
-        public int length = 0;
+        public List<Expense> Expenses; // Contains expenses
 
         public Record(string accountName)
         {
@@ -21,22 +20,22 @@ namespace SSE662Project1.Objects
             if (!(expense.ExpenseVendor.ToLower().Contains("payment"))) // Don't want to add payments to the credit card to the budget
             {
                 Expenses.Add(expense);
-                length++;
-                Console.WriteLine(expense.ExpenseDate + "\t" + expense.ExpensePrice + "\t" + expense.ExpenseVendor + "\t\t" + expense.ExpenseCategory.categoryID);
             }
         }
 
+        // Totals up the expenses in each category
         public List<string> CategoryTotals()
         {
-            string[] Categories = { "Vacation", "Recreation", "Groceries", "Medical", "Dental", "Utilities", "Allowance", "Car", "Pet", "Rent", "Other" };
+            Category dummy = new Category(null);
+            string[] Categories = dummy.Categories;//{ "Vacation", "Recreation", "Groceries", "Medical", "Dental", "Utilities", "Allowance", "Car", "Pet", "Rent", "Other" };
+            
             List<string> results = new List<string>();
             List<double> totals = new List<double>();
             for (int i = 0; i < Categories.Length; i++)
             {
                 double CategoryTotal = 0;
-                for (int j = 0; j < length; j++)
+                for (int j = 0; j < Expenses.Count; j++)
                 {
-                    //Console.WriteLine(Expenses[j].GetCategory()+ " "+ Categories[i]);
                     if (string.Equals(Expenses[j].ExpenseCategory.categoryID, Categories[i]))
                     {
                         CategoryTotal += Expenses[j].ExpensePrice;
@@ -47,6 +46,7 @@ namespace SSE662Project1.Objects
             return results;
         }
 
+        // Finds the earliest and latest expenses in the record
         public DateTime[] DateRange()
         {
             DateTime min = Expenses[0].ExpenseDate;

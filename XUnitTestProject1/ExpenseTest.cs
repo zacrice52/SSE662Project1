@@ -23,9 +23,12 @@ namespace SSE662Project1Test
         [Fact]
         public void ExpenseEqualsTest()
         {
+            // Test the not equal case
             var testExpenseNULL = new Expense(null, null, null);
             var testExpense = new Expense(datestring, pricestring, vendorstring);
             Assert.False(testExpenseNULL.Equals(testExpense));
+
+            // Test the equal case
             var testExpense0 = new Expense(datestring, pricestring, vendorstring);
             Assert.True(testExpense0.Equals(testExpense));
         }
@@ -33,11 +36,14 @@ namespace SSE662Project1Test
         [Fact]
         public void CreateExpenseTest()
         {
+            // Test the not equal case (using a null Expense)
             var testExpense0 = new Expense(null, null, null);
             Assert.NotEqual(testdate, testExpense0.ExpenseDate);
             Assert.NotEqual(testprice, testExpense0.ExpensePrice);
             Assert.NotEqual(vendorstring, testExpense0.ExpenseVendor);
             Assert.False(testcategory.Equals(testExpense0.ExpenseCategory));
+
+            // Test the equal case
             var testExpense = new Expense(datestring, pricestring, vendorstring);
             Assert.Equal(testdate, testExpense.ExpenseDate);
             Assert.Equal(testprice, testExpense.ExpensePrice);
@@ -49,17 +55,25 @@ namespace SSE662Project1Test
         public void EditExpenseTest()
         {
             var testExpense = new Expense(datestring, pricestring, vendorstring);
-
+            
+            // Test to show that it was created successfully
             Assert.Equal(testdate, testExpense.ExpenseDate);
             Assert.Equal(testprice, testExpense.ExpensePrice);
             Assert.Equal(vendorstring, testExpense.ExpenseVendor);
             Assert.True(testcategory.Equals(testExpense.ExpenseCategory));
-            //Assert.Same(testcategory, testExpense.ExpenseCategory);
 
+            // Show that it is not equal to what it will be changed to 
+            Assert.NotEqual(testdate2, testExpense.ExpenseDate);
+            Assert.NotEqual(testprice2, testExpense.ExpensePrice);
+            Assert.NotEqual(vendorstring2, testExpense.ExpenseVendor);
+            Assert.False(testcategory2.Equals(testExpense.ExpenseCategory));
+
+            // Change it
             testExpense.ExpenseDate = testdate2;
             testExpense.ExpensePrice = testprice2;
             testExpense.ExpenseVendor = vendorstring2;
 
+            // Show that it is now equal to what was changed to 
             Assert.Equal(testdate2, testExpense.ExpenseDate);
             Assert.Equal(testprice2, testExpense.ExpensePrice);
             Assert.Equal(vendorstring2, testExpense.ExpenseVendor);

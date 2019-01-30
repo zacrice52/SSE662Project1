@@ -5,7 +5,7 @@ namespace SSE662Project1.Objects
 {
     public class Category
     {
-        private List<List<string>> CategoryKeywords = new List<List<string>>
+        private static List<List<string>> CategoryKeywords = new List<List<string>>
                 { new List<string> { "kayak", "flight" },                                               /* Vacation Keywords   */
                   new List<string> { "amc", "coffee", "groupon", "ski" },                               /* Recreation Keywords */
                   new List<string> { "vons", "ralphs", "trader joe's", "costco", "wal-mart", "pizza" }, /* Groceries Keywords  */
@@ -17,9 +17,9 @@ namespace SSE662Project1.Objects
                   new List<string> { "pet", "vet" },                                                    /* Pet Keywords        */
                   new List<string> { "rent", "check" }                                                  /* Rent Keywords       */  };
 
-        private string[] Categories = {"Vacation", "Recreation", "Groceries", "Medical", "Dental", "Utilities", "Allowance", "Car", "Pet", "Rent", "Other"};
+        public string[] Categories { get; } = { "Vacation", "Recreation", "Groceries", "Medical", "Dental", "Utilities", "Allowance", "Car", "Pet", "Rent", "Other" };
 
-        public string categoryID { get; }
+        public string categoryID { get; } // ID is permanent once set; cannot be changed
         
         public Category(string vendor)
         {
@@ -30,7 +30,7 @@ namespace SSE662Project1.Objects
             for (int i = 0; i<CategoryKeywords.Count; i++)
                 for(int j = 0; j<CategoryKeywords[i].Count; j++)
                 {
-                    
+                    // Once a keyword is found, the loop breaks and the ID is assigned
                     if (vendor.ToLower().Contains(CategoryKeywords[i][j]))
                     {
                         id = i;
@@ -50,7 +50,7 @@ namespace SSE662Project1.Objects
             {
                 return false;
             }
-            else
+            else //As long as the IDs are equal, the objects are equal
             {
                 Category c = (Category)obj;
                 return string.Equals(categoryID, c.categoryID);
@@ -59,7 +59,7 @@ namespace SSE662Project1.Objects
 
         public override int GetHashCode()
         {
-            return categoryID.GetHashCode();
+            return categoryID.GetHashCode(); //Equal IDs return the same hash code
         }
     }
 }

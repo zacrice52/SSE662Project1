@@ -37,12 +37,7 @@ namespace SSE662Project1.Objects
                 ExpenseCategory = new Category(value);
             }
         }
-        public Category ExpenseCategory;
-
-        /*public string GetCategory()
-        {
-            return ExpenseCategory.categoryID;
-        }*/
+        public Category ExpenseCategory { get; private set; }
 
         public override bool Equals(Object obj)
         {

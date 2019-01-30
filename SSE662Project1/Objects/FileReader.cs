@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
+﻿using System.IO;
 
 namespace SSE662Project1.Objects
 {
@@ -14,8 +12,7 @@ namespace SSE662Project1.Objects
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    //Console.WriteLine(values[2]);
-                    // Note: values = [date, price, vendor]
+                    // Input file should be 'date, price, vendor'
                     Expense expense = new Expense(values[0], values[1], values[2]);
                     record.AddExpense(expense);
                 }
